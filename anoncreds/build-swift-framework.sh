@@ -7,7 +7,7 @@ trap popd EXIT
 
 NAME="anoncreds_uniffi"
 VERSION=${1:-"1.0"} # first arg or "1.0"
-BUNDLE_IDENTIFIER="org.hyperledger.$NAME"
+BUNDLE_IDENTIFIER="org.hyperledger.anoncreds-uniffi"
 LIBRARY_NAME="lib$NAME.a"
 FRAMEWORK_LIBRARY_NAME=${NAME}FFI
 FRAMEWORK_NAME="$FRAMEWORK_LIBRARY_NAME.framework"
@@ -24,6 +24,9 @@ AARCH64_APPLE_DARWIN_PATH="./target/aarch64-apple-darwin/release"
 X86_64_APPLE_DARWIN_PATH="./target/x86_64-apple-darwin/release"
 
 targets=("aarch64-apple-ios" "aarch64-apple-ios-sim" "x86_64-apple-ios" "aarch64-apple-darwin" "x86_64-apple-darwin")
+
+# Set iOS deployment target for linker
+export IPHONEOS_DEPLOYMENT_TARGET=$MIN_IOS_VERSION
 
 # Build for all targets
 for target in "${targets[@]}"; do
