@@ -31,8 +31,8 @@ var package = Package(
             path: "swift/Tests/AnoncredsTests"),
         .binaryTarget(
             name: "anoncreds_uniffiFFI",
-            url: "https://github.com/hyperledger/aries-uniffi-wrappers/releases/download/0.2.0-binary/anoncreds_uniffiFFI.xcframework.zip",
-            checksum: "ae96ac8bbef2b9d116b641f38bc3120e1e9666dae7333fe3a982d2a81ac34f2a"),
+            url: "https://github.com/minjunkim-dev/aries-uniffi-wrappers/releases/download/0.2.3-binary/anoncreds_uniffiFFI.xcframework.zip",
+            checksum: "917f9780b264386422a853db560bf5732b33df8342e569c718ee0e306abcf4b4"),
         .target(
             name: "Askar",
             path: "swift/Sources/Askar"),
