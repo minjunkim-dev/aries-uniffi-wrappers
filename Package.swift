@@ -32,7 +32,7 @@ var package = Package(
         .binaryTarget(
             name: "anoncreds_uniffiFFI",
             url: "https://github.com/minjunkim-dev/aries-uniffi-wrappers/releases/download/0.2.3-binary/anoncreds_uniffiFFI.xcframework.zip",
-            checksum: "917f9780b264386422a853db560bf5732b33df8342e569c718ee0e306abcf4b4"),
+            checksum: "effe053ec8898a600e9feb19229a47254f80093d1422e1dc9c8108c2b10ec5f5"),
         .target(
             name: "Askar",
             path: "swift/Sources/Askar"),
