@@ -5,8 +5,8 @@ import class Foundation.ProcessInfo
 var package = Package(
     name: "aries-uniffi-wrappers",
     platforms: [
-        .macOS(.v10_15),
-        .iOS(.v15),
+        .macOS(.v14_5),
+        .iOS(.v17_5),
     ],
     products: [
         .library(

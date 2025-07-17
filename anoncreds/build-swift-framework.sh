@@ -14,7 +14,8 @@ FRAMEWORK_NAME="$FRAMEWORK_LIBRARY_NAME.framework"
 XC_FRAMEWORK_NAME="$FRAMEWORK_LIBRARY_NAME.xcframework"
 HEADER_NAME="${NAME}FFI.h"
 OUT_PATH="out"
-MIN_IOS_VERSION="15.0"
+MIN_IOS_VERSION="17.5"
+MACOSX_DEPLOYMENT_TARGET="14.5"
 WRAPPER_PATH="../swift/Sources/Anoncreds"
 
 AARCH64_APPLE_IOS_PATH="./target/aarch64-apple-ios/release"
@@ -27,13 +28,43 @@ targets=("aarch64-apple-ios" "aarch64-apple-ios-sim" "x86_64-apple-ios" "aarch64
 
 # Set iOS deployment target for linker
 export IPHONEOS_DEPLOYMENT_TARGET=$MIN_IOS_VERSION
+export MACOSX_DEPLOYMENT_TARGET=$MACOSX_DEPLOYMENT_TARGET
+
+# 타겟별 RUSTFLAGS 환경 변수 설정
+export CARGO_TARGET_AARCH64_APPLE_IOS_RUSTFLAGS="-C link-arg=-mios-version-min=$MIN_IOS_VERSION"
+export CARGO_TARGET_AARCH64_APPLE_IOS_SIM_RUSTFLAGS="-C link-arg=-mios-version-min=$MIN_IOS_VERSION"
+export CARGO_TARGET_X86_64_APPLE_IOS_RUSTFLAGS="-C link-arg=-mios-version-min=$MIN_IOS_VERSION"
+export CARGO_TARGET_AARCH64_APPLE_DARWIN_RUSTFLAGS="-C link-arg=-mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET"
+export CARGO_TARGET_X86_64_APPLE_DARWIN_RUSTFLAGS="-C link-arg=-mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET"
+
+
 
 # Build for all targets
+cargo clean
+
 for target in "${targets[@]}"; do
   echo "Building for $target..."
   rustup target add $target
-  cargo build --release --target $target
+
+  if [[ "$target" == *"ios"* ]]; then
+    echo "DEBUG: Building for iOS target: $target"
+    echo "DEBUG: RUSTFLAGS will be applied via environment variables."
+    cargo build --release --target $target -vv
+  elif [[ "$target" == *"darwin"* ]]; then
+    echo "DEBUG: Building for macOS target: $target"
+    echo "DEBUG: RUSTFLAGS will be applied via environment variables."
+    cargo build --release --target $target -vv
+  else
+    echo "DEBUG: Building for other target: $target"
+    cargo build --release --target $target -v # -v 옵션 추가
+  fi
 done
+
+#for target in "${targets[@]}"; do
+#  echo "Building for $target..."
+#  rustup target add $target
+#  cargo build --release --target $target
+#done
 
 # Generate swift wrapper
 echo "Generating swift wrapper..."
