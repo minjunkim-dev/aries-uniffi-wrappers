@@ -33,7 +33,7 @@ var package = Package(
       name: "anoncreds_uniffiFFI",
       url:
         "https://github.com/minjunkim-dev/aries-uniffi-wrappers/releases/download/0.2.3-binary/anoncreds_uniffiFFI.xcframework.zip",
-      checksum: "effe053ec8898a600e9feb19229a47254f80093d1422e1dc9c8108c2b10ec5f5"),
+      checksum: "5b40cc2f5aea9605172100aa6f1909d23a9c6341ccd6b1ecad897313e405e749"
     .target(
       name: "Askar",
       path: "swift/Sources/Askar"),
